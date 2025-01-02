@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pemesanan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+        <h1 class="text-2xl font-bold mb-6 text-center">Form Pemesanan</h1>
+        <form id="formPemesanan" class="space-y-4">
+            <!-- Nama Pemesan -->
+            <div>
+                <label for="namaPemesan" class="block font-semibold mb-1">Nama Pemesan</label>
+                <input type="text" id="namaPemesan" name="namaPemesan" class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-indigo-200" required>
+            </div>
+
+            <!-- Jenis Kelamin -->
+            <div>
+                <label class="block font-semibold mb-1">Jenis Kelamin</label>
+                <div class="flex items-center gap-4">
+                    <label>
+                        <input type="radio" name="jenisKelamin" value="Laki-Laki" class="mr-2" required> Laki-Laki
+                    </label>
+                    <label>
+                        <input type="radio" name="jenisKelamin" value="Perempuan" class="mr-2" required> Perempuan
+                    </label>
+                </div>
+            </div>
+
+            <!-- Nomor Identitas -->
+            <div>
+                <label for="nomorIdentitas" class="block font-semibold mb-1">Nomor Identitas</label>
+                <input type="text" id="nomorIdentitas" name="nomorIdentitas" maxlength="16" minlength="16" class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-indigo-200" required>
+                <p class="text-sm text-gray-500">Harus 16 digit.</p>
+            </div>
+
+            <!-- Tipe Kamar -->
+            <div>
+                <label for="tipeKamar" class="block font-semibold mb-1">Tipe Kamar</label>
+                <select id="tipeKamar" name="tipeKamar" class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-indigo-200" required>
+                    <option value="">Pilih Tipe Kamar</option>
+                    <option value="Standar">Standar</option>
+                    <option value="Deluxe">Deluxe</option>
+                    <option value="Family">Family</option>
+                </select>
+            </div>
+
+            <!-- Harga -->
+            <div>
+                <label for="harga" class="block font-semibold mb-1">Harga</label>
+                <input type="number" id="harga" name="harga" class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-indigo-200" readonly>
+            </div>
+
+            <!-- Tanggal Pesan -->
+            <div>
+                <label for="tanggalPesan" class="block font-semibold mb-1">Tanggal Pesan</label>
+                <input type="date" id="tanggalPesan" name="tanggalPesan" class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-indigo-200" required>
+            </div>
+
+            <!-- Durasi Menginap -->
+            <div>
+                <label for="durasiMenginap" class="block font-semibold mb-1">Durasi Menginap (Hari)</label>
+                <input type="number" id="durasiMenginap" name="durasiMenginap" class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-indigo-200" required>
+            </div>
+
+            <!-- Termasuk Breakfast -->
+            <div>
+                <label class="flex items-center">
+                    <input type="checkbox" id="termasukBreakfast" name="termasukBreakfast" class="mr-2">
+                    Termasuk Breakfast
+                </label>
+            </div>
+
+            <!-- Total Bayar -->
+            <div>
+                <label for="totalBayar" class="block font-semibold mb-1">Total Bayar</label>
+                <input type="text" id="totalBayar" name="totalBayar" class="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-indigo-200" readonly>
+            </div>
+
+            <!-- Tombol Simpan -->
+            <button type="button" id="simpan" class="w-full bg-indigo-600 text-white font-semibold p-2 rounded-md hover:bg-indigo-700">Simpan</button>
+        </form>
+
+        <!-- Buttons to View Room Types and Facilities -->
+        <div class="mt-6 flex justify-between">
+            <button id="lihatJenisKamar" class="bg-blue-500 text-white p-2 rounded-md">Lihat Jenis Kamar</button>
+            <button id="lihatFasilitas" class="bg-green-500 text-white p-2 rounded-md">Lihat Fasilitas</button>
+        </div>
+
+        <!-- Room Image (Random) -->
+        <div class="mt-6 text-center">
+            <img src="https://source.unsplash.com/800x400/?hotel-room" alt="Random Room Image" class="rounded-lg shadow-lg">
+        </div>
+    </div>
+
+    <script>
+        // Script untuk validasi dan hitung total bayar
+        document.getElementById('simpan').addEventListener('click', () => {
+            const durasi = parseInt(document.getElementById('durasiMenginap').value) || 0;
+            const hargaPerHari = { "Standar": 500000, "Deluxe": 750000, "Family": 1000000 };
+            const tipeKamar = document.getElementById('tipeKamar').value;
+            const termasukBreakfast = document.getElementById('termasukBreakfast').checked;
+
+            if (!tipeKamar || durasi <= 0) {
+                alert('Pastikan semua data diisi dengan benar.');
+                return;
+            }
+
+            let total = (hargaPerHari[tipeKamar] || 0) * durasi;
+            if (durasi > 3) total *= 0.9; // Diskon 10%
+            if (termasukBreakfast) total += 80000; // Tambahan 80.000
+
+            document.getElementById('harga').value = hargaPerHari[tipeKamar];
+            document.getElementById('totalBayar').value = total.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+            alert('Data berhasil disimpan.');
+        });
+    </script>
+</body>
+</html>

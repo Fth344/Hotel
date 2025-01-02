@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Hotel Santai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .login-form, .dashboard {
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-form input, .dashboard input, .dashboard select, .dashboard textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .dashboard label {
+            font-weight: bold;
+        }
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        .form-row div {
+            flex: 1;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        table th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Dashboard Admin - Hotel Santai</h1>
+</header>
+
+    <div class="dashboard">
+        <h2>Tambah Kamar dan Fitur Lainnya</h2>
+        <form action="#" method="POST">
+            <div class="form-row">
+                <div>
+                    <label for="room-number">Nomor Kamar:</label>
+                    <input type="text" id="room-number" name="room-number" placeholder="Masukkan Nomor Kamar" required>
+                </div>
+                <div>
+                    <label for="room-type">Tipe Kamar:</label>
+                    <select id="room-type" name="room-type">
+                        <option value="single">Single</option>
+                        <option value="double">Double</option>
+                        <option value="suite">Suite</option>
+                    </select>
+                </div>
+            </div>
+
+            <label for="room-description">Deskripsi Kamar:</label>
+            <textarea id="room-description" name="room-description" rows="4" placeholder="Masukkan Deskripsi Kamar" required></textarea>
+
+            <div class="form-row">
+                <div>
+                    <label for="room-price">Harga Kamar (per malam):</label>
+                    <input type="number" id="room-price" name="room-price" placeholder="Masukkan Harga" required>
+                </div>
+                <div>
+                    <label for="room-status">Status Kamar:</label>
+                    <select id="room-status" name="room-status">
+                        <option value="available">Tersedia</option>
+                        <option value="booked">Dipesan</option>
+                        <option value="maintenance">Dalam Perawatan</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="submit" value="Simpan Kamar">
+        </form>
+
+        <!-- Tombol Kembali ke Login -->
+        <button class="back-button" onclick="window.location.href='index.html'">Kembali ke Login</button>
+
+        <!-- Data Konsumen yang Sudah Dipesan -->
+        <h3 class="mt-8">Data Pemesanan Kamar</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Konsumen</th>
+                    <th>Nomor Kamar</th>
+                    <th>Tipe Kamar</th>
+                    <th>Harga</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Andi</td>
+                    <td>101</td>
+                    <td>Single</td>
+                    <td>Rp 500.000</td>
+                    <td>Dipesan</td>
+                </tr>
+                <tr>
+                    <td>Siti</td>
+                    <td>102</td>
+                    <td>Double</td>
+                    <td>Rp 700.000</td>
+                    <td>Tersedia</td>
+                </tr>
+                <tr>
+                    <td>Budi</td>
+                    <td>103</td>
+                    <td>Suite</td>
+                    <td>Rp 1.000.000</td>
+                    <td>Dalam Perawatan</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
